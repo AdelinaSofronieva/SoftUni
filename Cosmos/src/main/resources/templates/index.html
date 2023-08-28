@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cosmos</title>
+    <link rel="stylesheet" href="/css/reset-css.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+    <script src="/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div th:replace="fragments/navbar">Navbar</div>
+
+
+<div class="jumbotron">
+    <h1 class="display-4">
+        Hello,
+        <span sec:authorize="isAuthenticated()"
+              th:text="${#authentication.principal.fullName}">
+        </span>
+
+        <p sec:authorize="hasRole('Admin')"
+              >
+            Sorry, change your job or win the lottery :(
+        </p>
+
+        <span sec:authorize="!isAuthenticated()">
+            space traveller!
+        </span>
+    </h1>
+    <p class="lead">We are your space travel agency</p>
+    <hr class="my-4">
+    <p sec:authorize="!isAuthenticated()">Register or Login to begin your adventure.</p>
+    <p sec:authorize="isAuthenticated()">Let`s begin your space adventure.</p>
+
+
+</div>
+
+<div>
+    <footer> </footer>
+</div>
+
+</body>
+</html>
